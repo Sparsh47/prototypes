@@ -47,4 +47,52 @@ conc-task-queue/
 
 ---
 
+<details>
+<summary><b>🔌 custom-protocol-server</b> — Custom TCP Protocol Server in Go</summary>
+
+### Overview
+
+A lightweight TCP server in Go that implements a custom text-based protocol inspired by Redis. Clients connect over raw TCP and interact using simple single-word commands (`SET`, `GET`, `DEL`) to manage an in-memory key-value store.
+
+### Concepts Explored
+
+- **Custom Text Protocol** — Newline-delimited command parsing over raw TCP (e.g., `SET key value\n`)
+- **RESP-Inspired Response Format** — Responses prefixed with `+` for success (`+OK`, `+value`) and `-ERR` for errors
+- **Concurrent Client Handling** — Each connection is handled in its own goroutine for parallel client support
+- **Thread-Safe In-Memory Store** — Uses `sync.RWMutex` for safe concurrent reads and exclusive writes
+
+### Protocol Reference
+
+| Command | Syntax | Description |
+|---------|--------|-------------|
+| `SET` | `SET <key> <value>` | Stores a key-value pair |
+| `GET` | `GET <key>` | Retrieves the value for a key |
+| `DEL` | `DEL <key>` | Deletes a key from the store |
+
+**Response format:**
+- `+OK` — Successful write/delete
+- `+<value>` — Successful read with returned value
+- `-ERR <message>` — Error (invalid command, missing key, etc.)
+
+### Project Structure
+
+```
+custom-protocol-server/
+├── cmd/
+│   └── main.go            # Entry point — starts the server on :8080
+├── server/
+│   └── server.go          # Server — TCP listener, command parsing & handlers
+├── lib/
+│   └── utils.go           # Response struct & RESP-style formatter
+└── go.mod
+```
+
+### Tech Stack
+
+`Go`
+
+</details>
+
+---
+
 > **Note:** This repo is a living collection — new experiments will be added over time as I keep learning and building.
