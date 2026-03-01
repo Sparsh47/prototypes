@@ -60,7 +60,16 @@ func (s *Server) handle(connection net.Conn) {
 			continue
 		}
 
-		parts := strings.Split(line, " ")
+		// Old tokenizer logic (for single word values)
+		// parts := strings.Split(line, " ")
+
+		// New tokenizer logic (for string as values)
+		parts, err := lib.ParseLine(line)
+		resp = lib.Response{
+			Value: "",
+			Err:   err,
+		}
+
 		cmd := strings.ToUpper(parts[0])
 		switch cmd {
 		case "SET":
@@ -113,7 +122,7 @@ func (s *Server) handleSET(key, value string) lib.Response {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	if value != "" && key != "" {
+	if value != "" {
 		s.store[key] = value
 		return lib.Response{
 			Value: "",
