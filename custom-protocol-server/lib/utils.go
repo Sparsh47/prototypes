@@ -61,6 +61,10 @@ func ParseLine(line string) ([]string, error) {
 		current.WriteRune(ch)
 	}
 
+	if escapeNext {
+		return nil, errors.New("trailing escape")
+	}
+
 	if isValueInQuotes {
 		return nil, errors.New("unterminated quotes")
 	}
