@@ -95,4 +95,42 @@ custom-protocol-server/
 
 ---
 
+<details>
+<summary><b>🔄 consistent-hashing</b> — Consistent Hashing Simulation in Node.js</summary>
+
+### Overview
+
+A Node.js prototype demonstrating the difference between simple modulo-based data distribution and consistent hashing algorithms. It simulates placing data keys across a virtual cluster of database nodes and evaluates the amount of data reshuffling required when the cluster scales (e.g., node added or removed).
+
+### Concepts Explored
+
+- **Consistent Hashing Algorithm** — Placing nodes and data on a hashed virtual ring (0 to 2^32-1) to minimize data movement during cluster scaling
+- **Modulo Hashing Pitfalls** — Demonstrating how basic `hash % N` operations trigger massive data redistribution when the underlying node count `N` changes
+- **State Partitioning Simulation** — Setting up local SQLite databases for each simulated node in a partitioned, stateful cluster environment
+- **Cryptographic Hash Uniformity** — Utilizing `SHA-256` from the `crypto` module to predictably and uniformly distribute keys across the network
+
+### Project Structure
+
+```text
+consistent-hashing/
+├── src/
+│   ├── index.ts           # Entry point — simulates hashing methods & scaling events
+│   ├── services/
+│   │   ├── hash.ts        # Hashing logic (SHA-256 manipulation)
+│   │   ├── ring.ts        # Consistent hashing ring implementation
+│   │   └── node.ts        # Basic modulo hashing logic
+│   └── db/
+│       └── init.ts        # SQLite local databases initialization
+├── package.json
+└── tsconfig.json
+```
+
+### Tech Stack
+
+`Node.js`, `TypeScript`, `Express`, `SQLite3`
+
+</details>
+
+---
+
 > **Note:** This repo is a living collection — new experiments will be added over time as I keep learning and building.
