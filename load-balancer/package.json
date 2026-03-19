@@ -1,0 +1,20 @@
+{
+  "name": "load-balancer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "dev:load": "ts-node src/load-balancer.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "ts-node": "^10.9.2"
+  }
+}
