@@ -2,7 +2,7 @@ import express from "express"
 import { initDatabases } from "./db/init"
 import { getDB } from "./services/dbClient"
 import { getNode, nodes } from "./services/node"
-import { buildRing, getRingNode, rings } from "./services/ring"
+import { addNode, buildRing, getRingNode, rings } from "./services/ring"
 import { getHash } from "./services/hash"
 
 const server = express()
@@ -13,7 +13,7 @@ initDatabases()
 
 const users = []
 
-for (let i = 1; i <= 20; i++) {
+for (let i = 1; i <= 10000; i++) {
   users.push(`user${i}`)
 }
 
@@ -61,7 +61,7 @@ users.forEach((user) => {
   oldMapping[user] = getRingNode(user)
 })
 
-rings.push({ name: "node5", hash: getHash("node5") })
+addNode("node5")
 
 rings.sort((a, b) => a.hash - b.hash)
 
