@@ -1,0 +1,13 @@
+{
+  // Type-checking config for root-level scripts that are run directly by
+  // Node / Prisma CLI and do NOT get compiled into dist/.
+  // Examples: prisma.config.ts, seed-api.mjs, k6/**
+  "extends": "./tsconfig.json",
+  "include": ["*.ts", "k6/**/*.ts"],
+  "compilerOptions": {
+    // These files have no rootDir constraint — they are never emitted.
+    "rootDir": ".",
+    "noEmit": true
+  }
+}
+

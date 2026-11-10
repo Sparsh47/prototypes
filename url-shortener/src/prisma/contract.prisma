@@ -1,0 +1,9 @@
+// use prisma-8
+
+model Link {
+  code      String   @id
+  url       String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("links")
+}
