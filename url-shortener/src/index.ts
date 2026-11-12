@@ -6,7 +6,7 @@ const PORT = env.PORT ?? 3000;
 
 const app = express();
 app.use(express.json());
-app.use('/api/url', urlRoutes);
+app.use('/api', urlRoutes);
 
 app.listen(PORT, () => {
   console.log(`URL shortener listening on ${process.env.BASE_URL}`);

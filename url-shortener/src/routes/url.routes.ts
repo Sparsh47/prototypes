@@ -5,7 +5,7 @@ import { env } from "../config/env.config.ts";
 
 export const urlRoutes = Router();
 
-urlRoutes.post('/api/shorten', async (req, res) => {
+urlRoutes.post('/shorten', async (req, res) => {
     const url = typeof req.body?.url === 'string' ? req.body.url.trim() : '';
     if (!url) {
         res.status(400).json({ error: 'url is required' });
@@ -17,24 +17,24 @@ urlRoutes.post('/api/shorten', async (req, res) => {
 
     res.status(200).json({
         code,
-        short: `${env.BASE_URL}/${code}`,
+        short: `${env.BASE_URL}/api/${code}`,
     });
 });
 
-urlRoutes.get('/api/links', async (_req, res) => {
+urlRoutes.get('/links', async (_req, res) => {
     const links = await db.orm.public.Link.all();
 
     res.json(
         links.map((link) => ({
             code: link.code,
             url: link.url,
-            short: `${env.BASE_URL}/${link.code}`,
+            short: `${env.BASE_URL}/api/${link.code}`,
             created_at: link.createdAt,
         })),
     );
 });
 
-urlRoutes.delete('/api/links/:code', async (req, res) => {
+urlRoutes.delete('/links/:code', async (req, res) => {
     const code = String(req.params.code);
 
     const deleted = await db.orm.public.Link.where({ code }).delete();

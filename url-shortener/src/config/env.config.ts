@@ -1,4 +1,4 @@
-import { envSchema } from "../schema/env.schema";
+import { envSchema } from "../schema/env.schema.ts";
 
 const parsedEnv = envSchema.safeParse(process.env);
 
