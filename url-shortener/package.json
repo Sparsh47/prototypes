@@ -7,6 +7,7 @@
     "start": "node --env-file .env src/index.ts",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
+    "test:baseline": "k6 run src/performance/tests/baseline.js",
     "postinstall": "prisma skills sync || exit 0",
     "contract:emit": "prisma contract emit"
   },

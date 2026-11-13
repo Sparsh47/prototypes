@@ -15,7 +15,7 @@ urlRoutes.post('/shorten', async (req, res) => {
     const code = generateCode();
     await db.orm.public.Link.create({ code, url, createdAt: new Date() });
 
-    res.status(200).json({
+    res.status(201).json({
         code,
         short: `${env.BASE_URL}/api/${code}`,
     });
